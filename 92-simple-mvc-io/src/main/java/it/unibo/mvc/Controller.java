@@ -3,6 +3,7 @@ package it.unibo.mvc;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintStream;
+import java.nio.charset.StandardCharsets;
 
 /**
  * Application controller. Performs the I/O.
@@ -41,7 +42,7 @@ public class Controller {
      * @param input
     */
     public void write(final String input) {
-        try (PrintStream ps = new PrintStream(this.file)) {
+        try (PrintStream ps = new PrintStream(this.getFilePath(), StandardCharsets.UTF_8)) {
             ps.println(input);
         } catch (IOException e) {
             System.out.println(e.getMessage()); //NOPMD: simpliest way to handle an error
