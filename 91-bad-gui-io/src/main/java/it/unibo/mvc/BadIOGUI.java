@@ -15,7 +15,8 @@ import java.io.IOException;
 import java.io.PrintStream;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
-import java.util.List;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Random;
 
 /**
@@ -42,9 +43,19 @@ public class BadIOGUI {
         final JPanel canvas = new JPanel();
         canvas.setLayout(new BorderLayout());
         final JButton write = new JButton("Write on file");
-        canvas.add(write, BorderLayout.CENTER);
         frame.setContentPane(canvas);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        //ex 01.01
+        final JPanel newCanvas = new JPanel();
+        newCanvas.setLayout(new BoxLayout(newCanvas, BoxLayout.Y_AXIS));
+        frame.remove(canvas);
+        frame.add(newCanvas, BorderLayout.CENTER);
+        newCanvas.add(write);
+
+        //ex 01.02
+        final JButton read = new JButton("Read from file");
+        newCanvas.add(read);
         /*
          * Handlers
          */
@@ -66,9 +77,27 @@ public class BadIOGUI {
                 }
             }
         });
+
+        read.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(final ActionEvent e) {
+                final Path path = Paths.get(PATH);
+                try {
+                    for (final var line: Files.readAllLines(path)) {
+                        System.out.println(line); // NOPMD: required by the exercise
+                    }
+                } catch (IOException err) {
+                    JOptionPane.showMessageDialog(frame, err.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        });
     }
 
     private void display() {
+        /*
+         * Resize the page
+        */
+        frame.pack();
         /*
          * Make the frame one fifth the resolution of the screen. This very method is
          * enough for a single screen setup. In case of multiple monitors, the
