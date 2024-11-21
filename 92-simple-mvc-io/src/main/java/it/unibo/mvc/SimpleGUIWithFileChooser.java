@@ -25,7 +25,9 @@ public final class SimpleGUIWithFileChooser {
     private final JFrame frame = new JFrame();
     private final Controller controller = new Controller();
 
-    /** */
+    /** 
+     * Create the look and the handlers of the event of the frame.
+    */
     public SimpleGUIWithFileChooser() {
         final JPanel canvas = new JPanel(new BorderLayout());
         final JPanel topCanvas = new JPanel(new BorderLayout());
@@ -49,7 +51,7 @@ public final class SimpleGUIWithFileChooser {
             @Override
             public void actionPerformed(final ActionEvent e) {
                 controller.write(txtArea.getText());
-                txtArea.insert("", 0);
+                txtArea.setText("");    //clear the text area
             }
         });
 
@@ -57,6 +59,7 @@ public final class SimpleGUIWithFileChooser {
             @Override
             public void actionPerformed(final ActionEvent e) {
                 final JFileChooser fChooser = new JFileChooser();
+                fChooser.setSelectedFile(controller.getFile());
                 final var res = fChooser.showSaveDialog(frame);
                 if (res == JFileChooser.APPROVE_OPTION) {
                     controller.setCurrentFile(fChooser.getSelectedFile());
@@ -68,7 +71,9 @@ public final class SimpleGUIWithFileChooser {
         });
     }
 
-    /** */
+    /**
+     * Resize and display the frame.
+    */
     public void display() {
         /*
          * Resize the page
@@ -88,7 +93,10 @@ public final class SimpleGUIWithFileChooser {
     }
 
     /** 
-     * @param args
+     * launches the application.
+     * 
+     * @param args 
+     *              unused
     */
     public static void main(final String... args) {
         new SimpleGUIWithFileChooser().display();

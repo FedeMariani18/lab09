@@ -18,10 +18,22 @@ public class Controller {
 
     /**
      * Set the current file of the class to f.
-     * @param f
+     * 
+     * @param f 
+     *          file where to write
      */
     public void setCurrentFile(final File f) {
         this.file = f;
+    }
+
+    /**
+     * Set the current file of the class to f.
+     * 
+     * @param fileName 
+     *          String name of the file where to write 
+     */
+    public void setCurrentFile(final String fileName) {
+        setCurrentFile(new File(fileName));
     }
 
     /** 
@@ -39,7 +51,10 @@ public class Controller {
     }
 
     /** 
+     * Write some text on the current file.
+     * 
      * @param input
+    *              the text to write on the file
     */
     public void write(final String input) {
         try (PrintStream ps = new PrintStream(this.getFilePath(), StandardCharsets.UTF_8)) {

@@ -21,7 +21,9 @@ public final class SimpleGUI {
     private final JFrame frame = new JFrame();
     private final Controller controller = new Controller();
 
-    /** */
+    /** 
+     * Create the look and the handlers of the event of the frame.
+    */
     public SimpleGUI() {
         final JPanel canvas = new JPanel(new BorderLayout());
         frame.setContentPane(canvas);
@@ -42,7 +44,9 @@ public final class SimpleGUI {
         });
     } 
 
-    /** */
+    /**
+     * Resize and display the frame.
+    */
     public void build() {
         /*
          * Resize the page
@@ -62,7 +66,10 @@ public final class SimpleGUI {
     }
 
     /** 
+     * Launches the application. 
+     * 
      * @param args
+     *              unused
     */
     public static void main(final String... args) {
         new SimpleGUI().build();
