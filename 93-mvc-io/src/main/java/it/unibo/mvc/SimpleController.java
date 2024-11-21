@@ -7,26 +7,31 @@ import java.util.List;
  * 
  *
  */
-public final class SimpleController implements Controller {
+public final class SimpleController implements Controller<String> {
 
     private String str;
-    private List<String> history = new ArrayList<>();
+    private final List<String> history = new ArrayList<>();
 
     @Override
     public void print() {
         if (str == null) {
             throw new IllegalStateException("Error: The string is unset");
         }
-        System.out.println(this.str);
+        System.out.println(this.str);   //NOPMD requested by the exercise
         history.add(this.str);
     }
+
     @Override
-    public List<String> read() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'read'");
+    public void read(final String input) {
+        setStr(input);
     }
 
-    /** */
+    /** 
+     * Set the next string to print.
+     * 
+     * @param str
+     *          the string to set
+    */
     public void setStr(final String str) {
         if (str == null) {
             throw new IllegalArgumentException("Error: the string can't be null");
@@ -34,15 +39,17 @@ public final class SimpleController implements Controller {
         this.str = str;
     }
 
-    /** */
+    /** 
+     * @return the last string managed.
+    */
     public String getStr() {
-        return str;
+        return this.str;
     }
 
-    /** */
+    /**
+     * @return the history of all the string printed in a list of string.
+     */
     public List<String> getStringHistory() {
         return List.copyOf(this.history);
     }
-
-
 }
